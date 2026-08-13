@@ -25,5 +25,3 @@ streamlit run Number_Guessing.py
 ## 🌐 Live Demo
 
 Deployed using **Streamlit Community Cloud**.
-
-Enjoy guessing! 🎯
