@@ -18,7 +18,7 @@ A simple and interactive **Number Guessing Game** built using **Python and Strea
 ## ▶️ Run Locally
 
 ```bash
-pip install streamlit
+pip install -r requirements.txt
 streamlit run Number_Guessing.py
 ```
 
