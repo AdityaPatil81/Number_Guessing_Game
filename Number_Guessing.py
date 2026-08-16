@@ -19,6 +19,7 @@ if "game_over" not in st.session_state:
     st.session_state.game_over = False
 
 st.write("Guess a number between **1 to 100**.")
+st.write("10 Attempts ONLY!")
 
 guess = st.number_input(
     "Enter your guess:",
@@ -28,19 +29,22 @@ guess = st.number_input(
 )
 if st.session_state.attempts <= 9:
     if st.button("Guess"):
-        if not st.session_state.game_over:
-            st.session_state.attempts += 1
+        if guess > 0 and guess <= 100:
+            if not st.session_state.game_over:
+                st.session_state.attempts += 1
 
-            if guess < st.session_state.number:
-                st.warning("📉 Too Small!")
-            elif guess > st.session_state.number:
-                st.warning("📈 Too Large!")
-            else:
-                st.success(
-                    f"🎉 Congratulations! You guessed the number in {st.session_state.attempts} attempts."
-                )
-                st.balloons()
-                st.session_state.game_over = True
+                if guess < st.session_state.number:
+                    st.warning("📉 Too Small!")
+                elif guess > st.session_state.number:
+                    st.warning("📈 Too Large!")
+                else:
+                    st.success(
+                        f"🎉 Congratulations! You guessed the number in {st.session_state.attempts} attempts."
+                    )
+                    st.balloons()
+                    st.session_state.game_over = True
+        else:
+            st.error("InputOutOfRange Error: Enter Valid Number.")
 else:
     st.error(
         "You lost⛔."
