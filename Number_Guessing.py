@@ -46,8 +46,11 @@ if st.session_state.attempts <= 9:
         else:
             st.error("⚠️ Invalid Input — Please Enter a Number Between 1 and 100.")
 else:
-    st.error("Out of Tries! The Number Got Away This Time.")
-    st.write(f"**The Number Was - {st.session_state.number}.**")
+    if st.session_state.game_over:
+        st.write("**Start a New Game!**")
+    else:
+        st.error("Out of Tries! The Number Got Away This Time.")
+        st.write(f"**The Number Was - {st.session_state.number}.**")
 
 if st.button("New Game",type="primary"):
     st.session_state.number = random.randint(1, 100)
