@@ -19,7 +19,7 @@ if "game_over" not in st.session_state:
     st.session_state.game_over = False
 
 st.write("Guess a number between **1 to 100**.")
-st.write("10 Attempts ONLY!")
+st.write("You have **10 attempts** to find the correct number.")
 
 guess = st.number_input(
     "Enter your guess:",
@@ -28,34 +28,33 @@ guess = st.number_input(
     step=1
 )
 if st.session_state.attempts <= 9:
-    if st.button("Guess"):
+    if st.button("Guess",type="primary"):
         if guess > 0 and guess <= 100:
             if not st.session_state.game_over:
                 st.session_state.attempts += 1
 
                 if guess < st.session_state.number:
-                    st.warning("📉 Too Small!")
+                    st.warning("📉 Too Low - Try a Higher Number.")
                 elif guess > st.session_state.number:
-                    st.warning("📈 Too Large!")
+                    st.warning("📈 Too High - Try a Lower Number.")
                 else:
                     st.success(
-                        f"🎉 Congratulations! You guessed the number in {st.session_state.attempts} attempts."
+                        f"🎉 Congratulations! You guessed the number in {st.session_state.attempts} Attempts."
                     )
                     st.balloons()
                     st.session_state.game_over = True
         else:
-            st.error("InputOutOfRange Error: Enter Valid Number.")
+            st.error("⚠️ Invalid Input — Please Enter a Number Between 1 and 100.")
 else:
-    st.error(
-        "You lost⛔."
-    )
+    st.error("Out of Tries! The Number Got Away This Time.")
+    st.write(f"**The Number Was - {st.session_state.number}.**")
 
-if st.button("New Game"):
+if st.button("New Game",type="primary"):
     st.session_state.number = random.randint(1, 100)
     st.session_state.attempts = 0
     st.session_state.game_over = False
 
-    with st.spinner("Restarting..."):
+    with st.spinner("🔃 Restarting..."):
         time.sleep(3)
     
     st.rerun()
